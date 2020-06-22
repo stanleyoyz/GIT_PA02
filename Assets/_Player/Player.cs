@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
     {
         if(other.gameObject.tag == "obstacle")
         {
-            print("nigganae");
+            
             Instantiate(explosion, transform.position, transform.rotation);
             GameManager.Lives -= 1;
             HUD.HUDManager.UpdateLives();
