@@ -32,5 +32,9 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+        if(Lives <= 0)
+        {
+            HUD.HUDManager.GameOver();
+        }
     }
 }

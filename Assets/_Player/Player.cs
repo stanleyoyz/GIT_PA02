@@ -14,12 +14,15 @@ public class Player : MonoBehaviour
     private Animator thisAnimator = null;
 
     private float moveSpeed = 0.05f;
-
+    public GameObject explosion;
+    
+    
     void Start()
     {
         thisController = GetComponent<CharacterController>();
         thisAnimator = GetComponentInChildren<Animator>();
         playerMesh = transform.GetChild(0);
+        
     }
 
     void Update()
@@ -53,5 +56,23 @@ public class Player : MonoBehaviour
         thisController.Move(MoveDirection);
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -1.5f, 1.5f), transform.position.y, transform.position.z);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "obstacle")
+        {
+            print("nigganae");
+            Instantiate(explosion, transform.position, transform.rotation);
+            GameManager.Lives -= 1;
+            HUD.HUDManager.UpdateLives();
+        }
+        if (other.gameObject.tag == "avoid")
+        {
+            print("yang guang cai hong xiao bai ma");
+            GameManager.Score += 1;
+            HUD.HUDManager.UpdateScore();
+            
+        }
+    }
+
 
 }
